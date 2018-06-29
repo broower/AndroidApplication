@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,60 +16,36 @@
         android:layout_height="match_parent"
         android:background="@color/brand_color">
 
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/splash_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/logo"
+                android:layout_width="@dimen/splash_logo_width"
+                android:layout_height="@dimen/splash_logo_height"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_broower_logo_phone"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/website"
+                android:layout_width="@dimen/splash_website_width"
+                android:layout_height="@dimen/splash_website_height"
+                android:layout_above="@id/progressBar"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_broower_website_phone"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:indeterminate="true"/>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-
-                <ImageView
-                    android:id="@+id/logo"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    app:srcCompat="@drawable/broower_logo_phone"/>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/website"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:src="@drawable/broower_website_phone"/>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-
-            </LinearLayout>
-
-        </FrameLayout>
+        </RelativeLayout>
 
     </FrameLayout>
 

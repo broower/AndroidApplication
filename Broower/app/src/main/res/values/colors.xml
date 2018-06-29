@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/brand_color</color>
+    <color name="colorPrimaryDark">#3353d7</color>
+    <color name="colorAccent">#ffffff</color>
 
     <color name="brand_color">#4166fc</color>
-    <color name="status_bar_color">#f0f0f0</color>
-    <color name="status_bar_icons_color">#5e5e5e</color>
+    <color name="status_bar_color">@color/brand_color</color>
+    <color name="status_bar_icons_color">#fff</color>
 </resources>

@@ -1,23 +1,30 @@
 package com.example.maksim_zakharenka.broowerandroidapplication;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String URL_HOST = "https://broower.github.io/";
     public static final int FADE_OUT_MILLIS = 750;
 
+    private ProgressBar mProgressBar;
     private View mSplashBackgroundView;
     private View mSplashView;
     private WebView mWebView;
+    private boolean mIsError;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -29,12 +36,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        Utils.setStatusBarColor(this, R.color.status_bar_color);
-
         mSplashView = findViewById(R.id.splash_view);
         mSplashBackgroundView = findViewById(R.id.splash_background_view);
         mWebView = findViewById(R.id.web_view);
-
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -54,8 +58,43 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
 
+            @Override
+            public void onReceivedError(final WebView view, final WebResourceRequest request, final WebResourceError error) {
+                super.onReceivedError(view, request, error);
+
+                mIsError = true;
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Ошибка сети")
+                        .setMessage("Проверьте подключение к интернету и повторите снова.")
+                        .setCancelable(false)
+                        .setPositiveButton("Повторить", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(final DialogInterface dialog, final int which) {
+                                initWebView();
+                            }
+                        })
+                        .setNegativeButton("Отмена",
+                                new DialogInterface.OnClickListener() {
+
+                                    public void onClick(final DialogInterface dialog, final int id) {
+                                        finish();
+                                    }
+                                });
+
+                final AlertDialog alert = builder.create();
+                alert.show();
+            }
+
             public void onPageFinished(final WebView view, final String url) {
-                fadeOutLogos();
+                if (mIsError) {
+
+                } else {
+                    fadeOutLogos();
+                }
+
+                mIsError = false;
             }
         });
 
